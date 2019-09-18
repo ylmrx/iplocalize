@@ -5,7 +5,7 @@ Straight forward python3 library to test (quickly) and locate a bunch of free-pr
 ## Python module
 
 ```python
-import iplocalize.localize as ip
+import iplocalize as ip
 
 locator = ip.IPLoc()
 locator.threaded_localize([['1.2.3.4', '1111'], ['5.6.7.8', '2222'], ...])
@@ -14,7 +14,7 @@ locator.threaded_localize([['1.2.3.4', '1111'], ['5.6.7.8', '2222'], ...])
 
 IPLoc class will accept several parameters :
 
-- `geolite_file`: path to your copy of Geolite2-city.mmdb
+- `geolite_file`: path to your copy of Geolite2-city.mmdb (https://www.maxmind.com)
 - `test_url`: the URL the proxy will be tested upon (http200, and faster than timeout)
 - `timeout`: timeout (directly passed to requests, the actual request might be longer than timeout)
 - `threads`: number of concurrent jobs

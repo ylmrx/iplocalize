@@ -25,7 +25,7 @@ IPLoc class will accept several parameters :
 - `timeout`: timeout (directly passed to requests, the actual request might be longer than timeout)
 - `threads`: number of concurrent jobs
 
-The default value for threads is 100, it might sound huge, but it gave me *me* pretty good results, feel free to tweak it to your needs.
+The default value for threads is 100, it might sound huge, but it gave *me* pretty good results, feel free to tweak it to your needs.
 
 ## Command line
 

@@ -5,9 +5,7 @@ python:
 before_install:
   - pip install -U pip
   - pip install -U pytest
-  - pip install codecov
+  - pip install pytest-cov
 install:
   - pip install .
-script: pytest -v 
-after_success:
-  - codecov 
+script: pytest -v --cov=./

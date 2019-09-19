@@ -26,6 +26,9 @@ setuptools.setup(
     ],
     entry_points = {
         'console_scripts': ['iplocalize=iplocalize.cmd:main'],
-    }
+    },
+
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest']
 )
 

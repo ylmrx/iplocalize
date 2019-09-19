@@ -2,6 +2,12 @@
 
 Straight forward python3 library to test (quickly) and locate a bunch of free-proxy IP.
 
+## Installation
+
+```bash
+pip install iplocalize
+```
+
 ## Python module
 
 ```python

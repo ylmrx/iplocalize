@@ -2,6 +2,8 @@
 
 Straight forward python3 library to test (quickly) and locate a bunch of free-proxy IP.
 
+[![Build Status](https://travis-ci.org/ylmrx/iplocalize.svg?branch=master)](https://travis-ci.org/ylmrx/iplocalize)
+
 ## Installation
 
 ```bash

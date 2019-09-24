@@ -24,12 +24,13 @@ class FakeReturn:
 def test_localize(monkeypatch):
     monkeypatch.setattr(requests, 'get', FakeReturn.get)
     expected = { 'ip': ':'.join(one_ip), 'cc': 'PC', 'time': 1.0 }
-    loc = iplocalize.IPLoc(geolite_file='./tests/fake-data.mmdb')
-    assert loc.localize(one_ip) == expected
+    geo_obj = Reader('./tests/fake-data.mmdb')
+    loc = iplocalize.IPLoc()
+    assert loc.localize(one_ip, geo_obj) == expected
 
 def test_threaded_localize(monkeypatch):
     monkeypatch.setattr(requests, 'get', FakeReturn.get)
     expected = [ { 'ip': ':'.join(ip), 'cc': 'PC', 'time': 1.0 } for ip in many_ip ]
-    loc = iplocalize.IPLoc(geolite_file='./tests/fake-data.mmdb')
-    assert loc.threaded_localize(many_ip) == expected
+    loc = iplocalize.IPLoc()
+    assert loc.threaded_localize(many_ip, './tests/fake-data.mmdb') == expected
 

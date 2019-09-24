@@ -19,12 +19,11 @@ def main():
                         help="One or more addresses to tests as free unauthenticated proxies")
     args = parser.parse_args()
 
-    locator = ip.IPLoc(geolite_file=args.geofile,
-                       test_url=args.url,
+    locator = ip.IPLoc(test_url=args.url,
                        timeout=args.timeout,
                        threads=args.threads)
     px_to_check = [ ip_port.split(':') for ip_port in args.addresses ]
-    located_px = locator.threaded_localize(px_to_check)
+    located_px = locator.threaded_localize(px_to_check, args.geofile)
     print(highlight(pformat(located_px), PythonLexer(), Terminal256Formatter()))
 
 if __name__ == '__main__':

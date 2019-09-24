@@ -14,25 +14,24 @@ class IPLoc(object):
         - no non-sense tests
     """
     def __init__(self,
-                 geolite_file=geolite_default,
                  test_url=default_test_url,
                  timeout=default_timeout,
                  threads=default_threads,
                 ):
         self.test_url = test_url
-        self.reader = Reader(geolite_file)
         self.threads = threads
         self.timeout = timeout
 
-    def threaded_localize(self, many_ip):
+    def threaded_localize(self, many_ip, geolite_file):
         """
         Triggers call to localize in a multithreaded fashion
         """
+        geo = Reader(geolite_file)
         with ThreadPool(processes=self.threads) as p:
-            res = [ p.apply_async(self.localize, (ip,)) for ip in many_ip ]
+            res = [ p.apply_async(self.localize, (ip, geo)) for ip in many_ip ]
             return [ r.get() for r in res ]
 
-    def localize(self, ip):
+    def localize(self, ip, geo):
         px = ':'.join(ip)
         proxies = {
             'http': "http://%s" % px,
@@ -43,7 +42,7 @@ class IPLoc(object):
         except requests.exceptions.RequestException:
             return None 
         
-        c = self.reader.city(ip_address=ip[0])
+        c = geo.city(ip_address=ip[0])
         if c is not None and c.country.iso_code is not None and req.status_code == 200:
             return {'ip': px, 'cc': c.country.iso_code, 'time': req.elapsed.total_seconds() }
         else: 
